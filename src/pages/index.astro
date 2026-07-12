@@ -1,0 +1,460 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Marquee from "../components/Marquee.astro";
+const base = import.meta.env.BASE_URL;
+
+const services = [
+  { num:"01", slug:"foundation", title:"Personal Branding",
+    body:"We turn founders and executives into recognised industry icons — full identity strategy, content pillars, and visual language that commands authority.",
+    tags:["Brand Strategy","Content Pillars","Visual Identity","Platform Positioning"] },
+  { num:"02", slug:"growth",     title:"Viral Engineering",
+    body:"Data-backed hooks, retention structures, and title systems engineered to outperform the algorithm every single time.",
+    tags:["Hook Writing","A/B Testing","Retention Analytics","Competitor Research"] },
+  { num:"03", slug:"craft",      title:"Retention Editing",
+    body:"High-end editing optimised to hold attention — cuts, pacing, motion, and sound that keeps viewers locked from first frame to last.",
+    tags:["Long-form Editing","Short-form Cutting","Motion Graphics","Thumbnail Design"] },
+  { num:"04", slug:"scale",      title:"Multi-Platform Growth",
+    body:"YouTube, TikTok, Reels, LinkedIn — we engineer reach at scale across every platform that matters to your audience.",
+    tags:["YouTube","TikTok","Instagram Reels","LinkedIn Management"] },
+];
+
+const faqs = [
+  { q:"Who is behind QuidEdge?",
+    a:"We're a husband-and-wife duo — Levi and Chami — with 5+ years of industry experience. Chami leads as Creative Director. Together we run a global team of 20+ elite video editors, 5 script writers, and 5 social media ad specialists." },
+  { q:"Why QuidEdge over an in-house team?",
+    a:"Traditional agencies charge premium fees for slow output. In-house teams are expensive. We give you both at once: a dedicated global team operating 85% more efficiently than in-house, delivering world-class quality across all time zones." },
+  { q:"How does the contract work?",
+    a:"Contract-based for accountability — but you can pause or cancel any time. No long-term lock-ins. We earn your business every 30 days, simple as that." },
+  { q:"What's your client protection policy?",
+    a:"\"Client First\" is our core operating principle. We protect your brand integrity at all costs. Active partners also receive free LinkedIn management as a bonus." },
+  { q:"How do I send footage and feedback?",
+    a:"Your dedicated account manager onboards you into ClickUp — our project hub. Drop footage, give feedback, track progress. Simple, fast, and fully organised." },
+  { q:"What results can I realistically expect?",
+    a:"We can't guarantee virality — content still needs to resonate. What we do guarantee: videos that consistently outperform industry benchmarks. Clients typically see 10× better engagement than their previous content." },
+];
+
+const clients = ["Robert Herjavec","Ryan Trahan","Enes Yilmazer","Daniel","155M+ Views","20+ Editors","5 Years"];
+---
+
+<Layout
+  title="Engineered for Viral Impact"
+  description="World-class video editing and content strategy for 7–8 figure entrepreneurs. Trusted by Robert Herjavec, Ryan Trahan, and Enes Yilmazer."
+>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO — full viewport, kinetic line-mask reveal
+═══════════════════════════════════════════════════════ -->
+<section class="relative flex min-h-[calc(100vh-72px)] flex-col justify-between overflow-hidden px-6 pb-0 pt-14 md:pt-20">
+
+  <!-- Blue glow orb — depth behind headline -->
+  <div class="hero-glow pointer-events-none absolute -left-24 top-24 md:left-8 md:top-16" aria-hidden="true"></div>
+  <div class="hero-glow pointer-events-none absolute -right-24 bottom-0 opacity-50" aria-hidden="true"></div>
+
+  <div class="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between">
+
+    <!-- Top label — fades in with loader -->
+    <p class="label lm"><span class="lm-i d0">Video Editing Agency · Content Strategy · Personal Branding</span></p>
+
+    <!-- Kinetic headline — each line slides up from masked position -->
+    <div class="py-10 md:py-0">
+      <h1 class="text-[clamp(3.5rem,12vw,10.5rem)] font-light leading-[0.88] tracking-[-0.04em] select-none">
+        <span class="lm block"><span class="lm-i d1 block text-stone/30">We</span></span>
+        <span class="lm block"><span class="lm-i d2 block weight-anchor">Engineer</span></span>
+        <span class="lm block"><span class="lm-i d3 block weight-anchor text-proof">Viral</span></span>
+        <span class="lm block"><span class="lm-i d4 block">Impact.</span></span>
+      </h1>
+
+      <div class="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <p class="lm max-w-md text-stone leading-relaxed">
+          <span class="lm-i d4 block">World-class video production, retention editing, and strategic storytelling for 7–8 figure entrepreneurs.</span>
+        </p>
+        <div class="lm flex flex-wrap gap-3">
+          <span class="lm-i d5 flex flex-wrap gap-3">
+            <a href={`${base}contact`} class="btn-primary">
+              Start Scaling
+              <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+            <a href={`${base}work`} class="btn-secondary">
+              View Case Studies
+              <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats bar — pinned to bottom of hero viewport -->
+    <div class="lm border-t border-stone/12 py-7">
+      <div class="lm-i d5 grid grid-cols-2 gap-5 md:grid-cols-4">
+        {[
+          { target:155, suffix:"M+", label:"Views Generated"     },
+          { target:20,  suffix:"+",  label:"Elite Editors"       },
+          { target:85,  suffix:"%",  label:"More Efficient"      },
+          { target:5,   suffix:"+",  label:"Years Experience"    },
+        ].map(s => (
+          <div>
+            <p class="text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-none tracking-[-0.05em] text-paper"
+               data-target={s.target} data-suffix={s.suffix}>0</p>
+            <p class="label mt-2">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     TRUST MARQUEE
+═══════════════════════════════════════════════════════ -->
+<Marquee items={clients} label="Trusted by industry titans & global creators" />
+
+<!-- ═══════════════════════════════════════════════════
+     SERVICES — editorial numbered list (agency-grade)
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 py-24 md:py-36">
+  <div class="mx-auto max-w-7xl px-6">
+
+    <div class="mb-12 flex items-end justify-between reveal">
+      <div>
+        <p class="label">What we do</p>
+        <h2 class="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.03em]">
+          The Full <span class="weight-anchor">Ecosystem.</span>
+        </h2>
+      </div>
+      <a href={`${base}services`} class="btn-secondary hidden md:inline-flex">
+        All services
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+    </div>
+
+    <!-- Editorial list — each service is a full-width row -->
+    <div class="border-b border-stone/12">
+      {services.map((s, i) => (
+        <a href={`${base}services#${s.slug}`}
+           class={`service-row group reveal reveal-d${Math.min(i,3)}`}>
+
+          <!-- Number -->
+          <span class="label pt-1 text-stone/50 group-hover:text-proof transition-colors">{s.num}</span>
+
+          <!-- Title + body -->
+          <div>
+            <h3 class="text-xl md:text-2xl font-light text-paper group-hover:text-paper/80 transition-colors mb-3">
+              {s.title}
+            </h3>
+            <p class="text-sm text-stone leading-relaxed max-w-lg">{s.body}</p>
+            <!-- Tags — mobile hidden, show on md -->
+            <div class="hidden md:flex flex-wrap gap-2 mt-4">
+              {s.tags.map(t => (
+                <span class="border border-stone/18 px-2.5 py-1 text-[0.6rem] tracking-widest uppercase text-stone/70">{t}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Arrow — right column on desktop -->
+          <div class="hidden md:flex items-start justify-end pt-1">
+            <svg class="text-stone/40 group-hover:text-proof transition-colors arr" style="transition:transform .25s ease,color .25s ease"
+              width="18" height="18" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M2 10L10 2M10 2H4M10 2v6"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-6 md:hidden">
+      <a href={`${base}services`} class="btn-secondary w-full justify-center">All services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CINEMATIC REEL — full-bleed video moment
+═══════════════════════════════════════════════════════ -->
+<section class="relative overflow-hidden border-t border-stone/12" style="height:80vh;min-height:420px;">
+  <video
+    autoplay muted loop playsinline
+    class="absolute inset-0 h-full w-full object-cover"
+    style="opacity:.45;"
+    preload="auto"
+  >
+    <source src="https://www.quidedge.com/images/ryan_trahan.mp4"              type="video/mp4" />
+    <source src="https://www.quidedge.com/images/Robert Herjavec_Footage001.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Gradient overlays for readability -->
+  <div class="pointer-events-none absolute inset-0"
+    style="background:linear-gradient(to bottom, rgba(10,10,10,.65) 0%, transparent 35%, transparent 50%, rgba(10,10,10,.9) 100%)">
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex h-full flex-col justify-between p-8 md:p-16">
+    <p class="label">The work</p>
+    <div>
+      <h2 class="text-[clamp(3.5rem,9vw,8.5rem)] font-light leading-[0.88] tracking-[-0.05em]">
+        155M+<br/><span class="weight-anchor">Views.</span>
+      </h2>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href={`${base}work`} class="btn-secondary">
+          See all case studies
+          <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CASE STUDIES — three featured works
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 bg-ink-soft py-24 md:py-36">
+  <div class="mx-auto max-w-7xl px-6">
+
+    <div class="mb-14 flex items-end justify-between reveal">
+      <div>
+        <p class="label">Case studies</p>
+        <h2 class="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.03em]">
+          Selected <span class="weight-anchor">Works.</span>
+        </h2>
+      </div>
+      <a href={`${base}work`} class="btn-secondary hidden md:inline-flex">
+        Full portfolio
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+    </div>
+
+    <div class="grid gap-px bg-stone/10 md:grid-cols-3">
+      {[
+        { client:"Robert Herjavec", cat:"Shark Tank Investor · Personal Brand",
+          metrics:[{v:"5.2M+",l:"Views Generated"},{v:"300%",l:"Engagement Spike"}],
+          img:"https://www.quidedge.com/images/robert logo.png",
+          vid:"https://www.quidedge.com/images/Robert Herjavec_Footage001.mp4",
+          grad:"from-[#1a1208]" },
+        { client:"Ryan Trahan",     cat:"Elite YouTube Creator · Shorts Strategy",
+          metrics:[{v:"100M+",l:"Short-form Views"},{v:"10×",l:"Performance Lift"}],
+          img:"https://www.quidedge.com/images/Ryan.jpg",
+          vid:"https://www.quidedge.com/images/ryan_trahan.mp4",
+          grad:"from-[#0b1520]" },
+        { client:"Enes Yilmazer",   cat:"Luxury Real Estate · YouTube Growth",
+          metrics:[{v:"50M+",l:"Channel Views"},{v:"4M+",l:"Subscribers"}],
+          img:"https://www.quidedge.com/images/enes yilmazer.png",
+          vid:"https://www.quidedge.com/images/Enes Yilmazer.mp4",
+          grad:"from-[#0e1810]" },
+      ].map((w, i) => (
+        <a href={`${base}work`}
+           class={`card group relative flex min-h-[380px] flex-col justify-between overflow-hidden p-7 md:p-8 reveal reveal-d${i}`}>
+
+          <!-- Gradient bg + video on hover -->
+          <div class={`absolute inset-0 bg-gradient-to-b ${w.grad} to-ink`}></div>
+          <video poster={w.img} preload="none" muted playsinline loop
+            class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-30"
+            onmouseenter="this.play()" onmouseleave="this.pause()">
+            <source src={w.vid} type="video/mp4"/>
+          </video>
+          <img src={w.img} alt={w.client} loading="lazy"
+            class="absolute inset-0 h-full w-full object-cover opacity-15 transition-opacity duration-500 group-hover:opacity-0"/>
+
+          <!-- Content -->
+          <div class="relative z-10 flex h-full flex-col justify-between">
+            <p class="label">{w.cat}</p>
+            <div>
+              <h3 class="text-2xl font-light mb-5 mt-3">{w.client}</h3>
+              <div class="grid grid-cols-2 gap-4 border-t border-stone/15 pt-5 mb-5">
+                {w.metrics.map(m => (
+                  <div>
+                    <p class="text-xl font-extrabold tracking-tight">{m.v}</p>
+                    <p class="label mt-0.5">{m.l}</p>
+                  </div>
+                ))}
+              </div>
+              <span class="label text-proof group-hover:text-paper transition-colors">
+                View analysis →
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BILLBOARD STATS — four numbers that command space
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0 md:divide-x md:divide-stone/10">
+      {[
+        { target:155, suffix:"M+", head:"Total views",      sub:"across all client channels"       },
+        { target:20,  suffix:"+",  head:"Elite editors",    sub:"across every timezone"             },
+        { target:85,  suffix:"%",  head:"More efficient",   sub:"than traditional in-house"         },
+        { target:10,  suffix:"×",  head:"Better engagement",sub:"vs. clients' previous content"     },
+      ].map((s,i) => (
+        <div class={`md:px-10 reveal reveal-d${i} ${i===0?'md:pl-0':''}`}>
+          <p class="text-[clamp(3rem,6.5vw,5rem)] font-extrabold leading-none tracking-[-0.05em]"
+             data-target={s.target} data-suffix={s.suffix}>0</p>
+          <p class="mt-4 text-sm font-medium text-paper/85">{s.head}</p>
+          <p class="label mt-1">{s.sub}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     PACKAGES — two partnership tiers
+═══════════════════════════════════════════════════════ -->
+<section id="packages" class="border-t border-stone/12 bg-ink-soft py-24 md:py-36">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-14 reveal">
+      <p class="label">Partnership models</p>
+      <h2 class="mt-3 text-[clamp(2rem,5vw,3.5rem)] font-light leading-none tracking-[-0.03em]">
+        Scale Without the <span class="weight-anchor">Headaches.</span>
+      </h2>
+    </div>
+
+    <div class="grid gap-px bg-stone/10 md:grid-cols-2">
+      <!-- Viral Sprint -->
+      <div class="card p-9 md:p-12 reveal">
+        <p class="label mb-5">The Viral Sprint</p>
+        <h3 class="text-2xl md:text-3xl font-light">Short-form domination.</h3>
+        <p class="mt-3 text-sm text-stone max-w-sm leading-relaxed">For founders looking to dominate TikTok, Reels, and YouTube Shorts with precision-engineered content.</p>
+        <ul class="mt-8 space-y-3.5">
+          {["In-depth Channel Audit & Strategy","Up to 15 elite short-form videos / mo","Data-driven title & hook generation","Retention editing optimisation","Bi-weekly performance review"].map(f => (
+            <li class="flex items-start gap-3 text-sm text-stone">
+              <svg class="mt-0.5 shrink-0 text-proof" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <a href={`${base}contact`} class="btn-secondary mt-10 inline-flex">
+          Inquire about pricing
+          <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+        </a>
+      </div>
+
+      <!-- Digital Empire -->
+      <div class="card relative overflow-hidden p-9 md:p-12 reveal reveal-d1"
+           style="border-color:rgba(61,90,254,.22);">
+        <span class="absolute right-0 top-0 bg-proof px-4 py-2 text-[0.58rem] font-bold tracking-widest uppercase text-paper">
+          Most popular
+        </span>
+        <p class="label mb-5">The Digital Empire</p>
+        <h3 class="text-2xl md:text-3xl font-light">Full ecosystem, all platforms.</h3>
+        <p class="mt-3 text-sm text-stone max-w-sm leading-relaxed">The ultimate content ecosystem for absolute authority. Long-form + Short-form across every platform.</p>
+        <ul class="mt-8 space-y-3.5">
+          {["Dedicated Creative Director","4 high-retention YouTube videos / mo","30 viral repurposed Shorts / mo","A/B thumbnail & title testing","Script writing & ad management","Free LinkedIn management (bonus)"].map(f => (
+            <li class="flex items-start gap-3 text-sm text-stone">
+              <svg class="mt-0.5 shrink-0 text-proof" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              {f}
+            </li>
+          ))}
+        </ul>
+        <a href={`${base}contact`} class="btn-primary mt-10 inline-flex">
+          Apply for partnership
+          <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ABOUT SNAPSHOT
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 py-24 md:py-36">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="grid items-center gap-12 md:grid-cols-2 md:gap-24">
+
+      <div class="relative aspect-[4/5] overflow-hidden bg-ink-soft reveal">
+        <img src="https://www.quidedge.com/images/image01.jpg"
+          alt="Levi and Chami, co-founders of QuidEdge"
+          class="h-full w-full object-cover opacity-80 transition-transform duration-700 hover:scale-105"
+          loading="lazy"/>
+        <div class="absolute bottom-0 left-0 right-0 p-7"
+          style="background:linear-gradient(to top,rgba(10,10,10,.95),transparent)">
+          <p class="label">Co-Founders</p>
+          <p class="mt-1 font-medium text-paper">Levi &amp; Chami</p>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <p class="label">More than an agency</p>
+        <h2 class="mt-4 text-[clamp(2rem,4vw,3rem)] font-light leading-[1.1] tracking-[-0.025em]">
+          Your Growth <span class="weight-anchor">Partners.</span>
+        </h2>
+        <p class="mt-5 text-sm text-stone leading-relaxed">
+          Founded by Levi &amp; Chami — 5+ years turning entrepreneurs into digital icons. A family-built agency that treats your brand as its own legacy.
+        </p>
+        <p class="mt-4 text-sm text-stone leading-relaxed">
+          We don't just edit. We <span class="font-medium text-paper">engineer attention.</span> Our global team is 85% more efficient than traditional agencies — delivering speed without sacrificing quality.
+        </p>
+        <div class="mt-9 grid grid-cols-3 gap-5 border-t border-stone/12 pt-8">
+          {[{n:"20+",l:"Elite editors"},{n:"5",l:"Script writers"},{n:"5",l:"Ad specialists"}].map(s=>(
+            <div>
+              <p class="text-2xl font-extrabold tracking-tight">{s.n}</p>
+              <p class="label mt-1">{s.l}</p>
+            </div>
+          ))}
+        </div>
+        <a href={`${base}about`} class="btn-secondary mt-8 inline-flex">
+          Our story
+          <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 bg-ink-soft py-24 md:py-36">
+  <div class="mx-auto max-w-4xl px-6">
+    <div class="mb-14 reveal">
+      <p class="label">Got questions</p>
+      <h2 class="mt-3 text-[clamp(2rem,5vw,3rem)] font-light tracking-[-0.025em]">
+        Frequently <span class="weight-anchor">Asked.</span>
+      </h2>
+    </div>
+    <div class="divide-y divide-stone/12">
+      {faqs.map((f,i) => (
+        <div class={`reveal reveal-d${Math.min(i,3)}`}>
+          <button class="faq-btn group flex w-full items-center justify-between gap-6 py-5 text-left"
+                  aria-expanded="false">
+            <span class="text-sm font-medium text-paper group-hover:text-paper/75 transition-colors">{f.q}</span>
+            <span class="faq-icon shrink-0" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-panel">
+            <p class="pb-6 pr-8 text-sm text-stone leading-relaxed">{f.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CTA — the close
+═══════════════════════════════════════════════════════ -->
+<section class="border-t border-stone/12 py-32 md:py-48">
+  <div class="mx-auto max-w-4xl px-6 text-center reveal">
+    <p class="flex items-center justify-center gap-2.5 label">
+      <span class="live-dot"></span>
+      Limited availability for high-end clientele
+    </p>
+    <h2 class="mt-8 text-[clamp(3.5rem,9vw,7.5rem)] font-light leading-[0.88] tracking-[-0.05em]">
+      Ready to<br><span class="weight-anchor">Scale?</span>
+    </h2>
+    <p class="mt-7 text-stone max-w-xs mx-auto text-sm">Apply now. We earn your trust every 30 days.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a href={`${base}contact`} class="btn-primary">
+        Book a Strategy Call
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+      <a href={`${base}work`} class="btn-secondary">See our results first</a>
+    </div>
+    <p class="mt-8 label">Contract-based · Cancel anytime · We earn trust every 30 days</p>
+  </div>
+</section>
+
+</Layout>

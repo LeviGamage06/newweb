@@ -1,0 +1,183 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props { title: string; description: string; image?: string; }
+const { title, description, image } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const base = import.meta.env.BASE_URL;
+const og = image ?? `${Astro.site}og-default.png`;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href={`${base}logo.png`} />
+  <link rel="canonical" href={canonical} />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title} — QuidEdge</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:type"        content="website"       />
+  <meta property="og:url"         content={canonical}     />
+  <meta property="og:title"       content={`${title} — QuidEdge`} />
+  <meta property="og:description" content={description}   />
+  <meta property="og:image"       content={og}            />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={`${title} — QuidEdge`} />
+  <meta name="twitter:description" content={description}   />
+  <meta name="twitter:image"       content={og}            />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context":"https://schema.org","@type":"Organization",
+    "name":"QuidEdge","alternateName":"QuidEdge — Personal Branding Guru",
+    "description":"World-class video editing and content strategy for 7–8 figure entrepreneurs. Trusted by Robert Herjavec, Ryan Trahan, and Enes Yilmazer.",
+    "url": Astro.site,
+    "founders":[{"@type":"Person","name":"Levi"},{"@type":"Person","name":"Chami"}],
+    "sameAs":["https://www.instagram.com/quidedge","https://www.linkedin.com/company/quidedge"]
+  })} />
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-proof focus:px-4 focus:py-2 focus:text-paper focus:text-xs">
+    Skip to content
+  </a>
+
+  <!-- Page loader -->
+  <div id="page-loader" aria-hidden="true">
+    <img id="loader-logo" src={`${base}logo.png`} alt="QuidEdge"
+      class="h-10 w-auto"
+      style="mix-blend-mode:screen;" />
+  </div>
+
+  <Nav />
+  <main id="main"><slot /></main>
+  <Footer />
+
+  <!-- Cursor dot (fine-pointer / desktop only) -->
+  <div id="qe-cursor" aria-hidden="true"
+    style="position:fixed;width:5px;height:5px;border-radius:50%;background:var(--color-proof);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);opacity:0;transition:width .18s,height .18s,opacity .4s,background .25s;">
+  </div>
+
+  <script>
+    /* ── Loader ─────────────────────────────────────────────────── */
+    const loader = document.getElementById('page-loader') as HTMLElement | null;
+    const logo   = document.getElementById('loader-logo') as HTMLElement | null;
+
+    // Show logo immediately
+    requestAnimationFrame(() => {
+      if (logo) logo.classList.add('show');
+    });
+
+    // After content loads + brief pause, dismiss and reveal page
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (loader) loader.classList.add('out');
+        document.body.classList.add('loaded');
+      }, 620);
+    });
+
+    /* ── Scroll-reveal (for below-fold sections) ─────────────────── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Count-up (for data-target elements) ─────────────────────── */
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el     = e.target as HTMLElement;
+        const target = parseFloat(el.dataset.target ?? '0');
+        const suffix = el.dataset.suffix ?? '';
+        const dur    = 2400;
+        const start  = performance.now();
+        const isInt  = Number.isInteger(target);
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          const val  = target * ease;
+          el.textContent = (isInt ? Math.round(val).toLocaleString() : val.toFixed(1)) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-target]').forEach(el => countObs.observe(el));
+
+    /* ── FAQ accordion ───────────────────────────────────────────── */
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        // close all
+        document.querySelectorAll('.faq-btn').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          const p = b.nextElementSibling as HTMLElement | null;
+          if (p) { p.style.maxHeight = '0'; p.style.opacity = '0'; }
+        });
+        // open clicked
+        if (!isOpen) {
+          btn.setAttribute('aria-expanded', 'true');
+          const panel = btn.nextElementSibling as HTMLElement | null;
+          if (panel) {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            panel.style.opacity   = '1';
+          }
+        }
+      });
+    });
+
+    /* ── Custom cursor ───────────────────────────────────────────── */
+    const cur = document.getElementById('qe-cursor') as HTMLElement | null;
+    if (cur && window.matchMedia('(pointer:fine)').matches) {
+      let mx = 0, my = 0;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cur.style.left = mx + 'px';
+        cur.style.top  = my + 'px';
+        cur.style.opacity = '1';
+      });
+      document.addEventListener('mousedown', () => {
+        cur.style.width = cur.style.height = '9px';
+      });
+      document.addEventListener('mouseup', () => {
+        cur.style.width = cur.style.height = '5px';
+      });
+      document.querySelectorAll('a,button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.width = cur.style.height = '22px';
+          cur.style.opacity = '0.35';
+        });
+        el.addEventListener('mouseleave', () => {
+          cur.style.width = cur.style.height = '5px';
+          cur.style.opacity = '1';
+        });
+      });
+    }
+
+    /* ── Nav scroll state ────────────────────────────────────────── */
+    const header = document.getElementById('site-header') as HTMLElement | null;
+    const onScroll = () => {
+      if (!header) return;
+      if (window.scrollY > 50) {
+        header.style.cssText += ';background:rgba(10,10,10,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(138,134,128,0.1);';
+      } else {
+        header.style.background = 'transparent';
+        header.style.backdropFilter = 'none';
+        header.style.borderBottom = 'none';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>

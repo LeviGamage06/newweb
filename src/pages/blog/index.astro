@@ -1,0 +1,113 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+
+// Future posts live here — uncomment and fill in as you publish
+const posts = [
+  {
+    slug:     "how-to-engineer-a-viral-hook",
+    date:     "July 2026",
+    category: "Viral Engineering",
+    title:    "How to Engineer a Viral Hook in Under 3 Seconds",
+    excerpt:  "The first three seconds determine whether your audience stays or scrolls. Here's the exact framework we use for every video we produce.",
+    reading:  "5 min read",
+    coming:   true,
+  },
+  {
+    slug:     "why-personal-branding-beats-paid-ads",
+    date:     "June 2026",
+    category: "Personal Branding",
+    title:    "Why Personal Branding Outperforms Paid Ads for 7-Figure Founders",
+    excerpt:  "Ads stop working when you stop paying. A personal brand compounds. Here's the data behind that claim and how to build one that lasts.",
+    reading:  "7 min read",
+    coming:   true,
+  },
+  {
+    slug:     "the-content-system-that-scaled-enes-to-4m",
+    date:     "May 2026",
+    category: "Case Study",
+    title:    "The Content System That Helped Scale Enes Yilmazer to 4M Subscribers",
+    excerpt:  "Inside the strategy, rhythm, and editing decisions that turned a real estate YouTube channel into the world's #1 in its niche.",
+    reading:  "9 min read",
+    coming:   true,
+  },
+  {
+    slug:     "retention-editing-101",
+    date:     "April 2026",
+    category: "Retention Editing",
+    title:    "Retention Editing 101: Why Most YouTube Videos Lose 60% of Viewers in the First Minute",
+    excerpt:  "Attention is the only currency that matters online. These are the editing principles we use to keep viewers locked in from first frame to last.",
+    reading:  "6 min read",
+    coming:   true,
+  },
+];
+---
+
+<Layout
+  title="Blog"
+  description="Insights on personal branding, viral engineering, and content strategy from the QuidEdge team."
+>
+  <!-- Header -->
+  <section class="border-b border-stone/15 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl">
+      <p class="label reveal">Insights</p>
+      <h1 class="mt-4 text-[clamp(2.5rem,7vw,5.5rem)] font-light leading-[1.0] tracking-[-0.03em] reveal reveal-d1">
+        The <span class="weight-anchor">Edge</span> Blog.
+      </h1>
+      <p class="mt-5 max-w-xl text-stone text-sm reveal reveal-d2">
+        Practical insights on personal branding, viral engineering, and retention editing — from the team behind 155M+ views.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts grid -->
+  <section class="py-16 md:py-24 px-6">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-px bg-stone/10 md:grid-cols-2">
+        {posts.map((p, i) => (
+          <article class={`card group relative overflow-hidden p-8 md:p-10 reveal reveal-d${i % 2}`}>
+            {p.coming && (
+              <span class="absolute right-4 top-4 border border-stone/20 px-2.5 py-1 text-[0.6rem] uppercase tracking-widest text-stone">
+                Coming soon
+              </span>
+            )}
+            <p class="label">{p.category}</p>
+            <h2 class="mt-3 text-xl font-light leading-snug text-paper group-hover:text-paper/80 transition-colors">
+              {p.title}
+            </h2>
+            <p class="mt-3 text-sm text-stone leading-relaxed line-clamp-3">{p.excerpt}</p>
+            <div class="mt-6 flex items-center justify-between border-t border-stone/12 pt-5">
+              <span class="label">{p.date} · {p.reading}</span>
+              {!p.coming && (
+                <a href={`${base}blog/${p.slug}`} class="label text-proof hover:text-paper transition-colors">
+                  Read →
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="border-t border-stone/15 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-2xl text-center reveal">
+      <p class="label">Never miss a post</p>
+      <h2 class="mt-4 text-4xl font-light leading-tight tracking-tight">
+        One insight a month. <span class="weight-anchor">No fluff.</span>
+      </h2>
+      <p class="mt-4 text-stone text-sm max-w-sm mx-auto">Short, actionable notes on branding and content — straight from the team behind 155M+ views.</p>
+      <!-- TODO: replace YOUR_NEWSLETTER_FORM_ID with your Formspree form ID -->
+      <form action="https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID" method="POST"
+            class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <label for="blog-email" class="sr-only">Email address</label>
+        <input id="blog-email" name="email" type="email" required
+          placeholder="you@example.com"
+          class="flex-1 border border-stone/25 bg-transparent px-4 py-3 text-sm text-paper placeholder:text-stone/40 focus:border-proof focus:outline-none" />
+        <input type="hidden" name="_subject" value="QuidEdge blog newsletter signup" />
+        <button type="submit" class="btn-primary shrink-0">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</Layout>

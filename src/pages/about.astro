@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+const values = [
+  { n:"01", t:"Client First",           b:"We protect your brand integrity at all costs. Your audience's trust is your most valuable asset — we treat it that way." },
+  { n:"02", t:"Engineer, don't guess",  b:"Every decision is backed by data. Hook rates, retention curves, CTR — we read the numbers so your instincts are informed." },
+  { n:"03", t:"Speed without sacrifice",b:"85% more efficient than in-house doesn't mean we rush. It means we've built systems that deliver fast without cutting corners." },
+  { n:"04", t:"Long-game thinking",     b:"Viral moments are great. A brand that compounds over years is better. We build both — the spike and the trajectory." },
+];
+---
+<Layout title="About Us" description="Meet Levi and Chami — the husband-and-wife founders behind QuidEdge, the world-class video editing and content strategy agency.">
+
+  <section class="border-b border-stone/12 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl">
+      <p class="label reveal">Our story</p>
+      <h1 class="mt-4 text-[clamp(2.5rem,8vw,6rem)] font-light leading-[0.9] tracking-[-0.04em] reveal reveal-d1">
+        More Than an <span class="weight-anchor">Agency.</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Founders -->
+  <section class="border-b border-stone/12 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      <div class="relative aspect-[3/4] overflow-hidden bg-ink-soft reveal">
+        <img src="https://www.quidedge.com/images/image01.jpg" alt="Levi and Chami — co-founders of QuidEdge"
+          class="w-full h-full object-cover opacity-80 transition-transform duration-700 hover:scale-105" loading="lazy"/>
+        <div class="absolute bottom-0 left-0 right-0 p-7"
+          style="background:linear-gradient(to top,rgba(10,10,10,.95),transparent)">
+          <p class="label">Co-founders</p>
+          <p class="mt-1 text-lg font-medium text-paper">Levi &amp; Chami</p>
+        </div>
+      </div>
+      <div class="reveal reveal-d1">
+        <h2 class="text-3xl md:text-4xl font-light leading-tight tracking-[-0.025em]">
+          A family-built agency that treats your brand like its own <span class="weight-anchor">legacy.</span>
+        </h2>
+        <p class="mt-6 text-sm text-stone leading-relaxed">Founded by Levi &amp; Chami — 5+ years turning entrepreneurs into digital icons. Chami leads as Creative Director; Levi drives strategy and growth. Together they've built a global team operating at a level most in-house teams can't match.</p>
+        <p class="mt-4 text-sm text-stone leading-relaxed">The name QuidEdge is a promise: your investment returns an <span class="text-paper font-medium">edge</span> — in reach, authority, and results. We earn that every month.</p>
+        <div class="mt-10 grid grid-cols-3 gap-5 border-t border-stone/12 pt-8">
+          {[{n:"5+",l:"Years experience"},{n:"20+",l:"Elite editors"},{n:"3+",l:"Iconic clients"}].map(s=>(
+            <div><p class="text-3xl font-extrabold tracking-tight">{s.n}</p><p class="label mt-1">{s.l}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="border-b border-stone/12 bg-ink-soft py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-14 reveal">
+        <p class="label">How we work</p>
+        <h2 class="mt-3 text-4xl font-light tracking-[-0.025em]">Our <span class="weight-anchor">Standard.</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-px bg-stone/10">
+        {values.map((v,i) => (
+          <div class={`card p-9 md:p-10 reveal reveal-d${i%2}`}>
+            <span class="ghost-num text-[3rem]" aria-hidden="true">{v.n}</span>
+            <h3 class="mt-2 text-xl font-medium">{v.t}</h3>
+            <p class="mt-3 text-sm text-stone leading-relaxed">{v.b}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="border-b border-stone/12 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-14 reveal">
+        <p class="label">The team</p>
+        <h2 class="mt-3 text-4xl font-light tracking-[-0.025em]">Global. <span class="weight-anchor">Elite.</span> Yours.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-px bg-stone/10">
+        {[
+          { c:"20+", r:"Video Editors",   d:"Hand-picked across timezones. Long-form, short-form, cinematic — every style covered." },
+          { c:"5",   r:"Script Writers",  d:"Specialists in hook writing, storytelling, and the psychology of why people keep watching." },
+          { c:"5",   r:"Ad Specialists",  d:"Paid and organic. They know what converts and how to engineer it at scale." },
+        ].map((t,i)=>(
+          <div class={`card p-9 md:p-10 reveal reveal-d${i}`}>
+            <p class="text-5xl font-extrabold tracking-tight">{t.c}</p>
+            <p class="mt-2 font-medium text-paper">{t.r}</p>
+            <p class="mt-3 text-sm text-stone leading-relaxed">{t.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-28 md:py-36 px-6 text-center">
+    <div class="mx-auto max-w-xl reveal">
+      <h2 class="text-4xl md:text-5xl font-light leading-tight tracking-[-0.025em]">
+        Work with a team that <span class="weight-anchor">earns it.</span>
+      </h2>
+      <a href={`${base}contact`} class="btn-primary mt-8 inline-flex">
+        Book a strategy call
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+    </div>
+  </section>
+</Layout>

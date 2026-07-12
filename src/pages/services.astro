@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+const services = [
+  { id:"foundation", num:"01", title:"Personal Branding",
+    headline:"Become the brand they can't ignore.",
+    body:["We turn founders and executives into recognised industry icons — not by making them louder, but by making them unmistakeable.", "Full identity strategy, content pillars, platform positioning, and visual language that commands authority at first glance. This is the foundation every piece of content is built on."],
+    deliverables:["Brand positioning document","Content pillar framework","Visual language guide","Platform strategy (which platforms, what frequency)","Bio & headline optimisation across platforms"],
+    img:"https://www.quidedge.com/images/image06.png" },
+  { id:"growth", num:"02", title:"Viral Engineering",
+    headline:"Beat the algorithm. Every time.",
+    body:["Hooks that stop the scroll. Structures that hold attention. Titles that earn the click. Viral Engineering is not guesswork — it's a data system.", "We analyse what's working across your niche, reverse-engineer the patterns, and apply them to your content. Then we test, iterate, and improve every cycle."],
+    deliverables:["Hook library (50+ tested hooks per niche)","Title & thumbnail A/B testing","Retention analytics review","Competitor breakdown & gap analysis","Monthly performance report"],
+    img:"https://www.quidedge.com/images/image05.png" },
+  { id:"craft", num:"03", title:"Retention Editing",
+    headline:"Every second earns the next one.",
+    body:["High-end editing optimised to hold attention — visual cuts, pacing, motion, and sound design that keeps viewers locked from first frame to last.", "We edit to the data. Every cut is intentional. Every transition serves the story. The result is content that performs in the feed and converts in the funnel."],
+    deliverables:["Long-form YouTube editing (4/mo on Digital Empire)","Short-form repurposing (30/mo on Digital Empire)","Captions & subtitles","Motion graphics & lower thirds","Thumbnail design"],
+    img:"https://www.quidedge.com/images/image08.png" },
+  { id:"scale", num:"04", title:"Multi-Platform Growth",
+    headline:"One brand. Every platform that matters.",
+    body:["YouTube, TikTok, Reels, LinkedIn — each platform has its own language, algorithm, and audience behaviour. We speak all of them.", "We don't just repurpose content. We engineer it for each platform's specific mechanics — the same message, tailored to land differently everywhere it shows up."],
+    deliverables:["Platform-specific content adaptation","LinkedIn content management (included free)","Cross-platform content calendar","Platform growth analytics","Ad creative production"],
+    img:"https://www.quidedge.com/images/image07.png" },
+];
+---
+<Layout title="Services" description="World-class video editing, viral engineering, retention editing, and multi-platform growth for 7–8 figure entrepreneurs.">
+
+  <section class="border-b border-stone/12 py-24 md:py-32 px-6">
+    <div class="mx-auto max-w-7xl">
+      <p class="label reveal">Our services</p>
+      <h1 class="mt-4 text-[clamp(2.5rem,8vw,6rem)] font-light leading-[0.9] tracking-[-0.04em] reveal reveal-d1">
+        The Full <span class="weight-anchor">Ecosystem.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-stone text-sm reveal reveal-d2">
+        Everything your brand needs to dominate the digital landscape — under one world-class roof.
+      </p>
+    </div>
+  </section>
+
+  {services.map((s, i) => (
+    <section id={s.id} class="border-b border-stone/12 py-24 md:py-32 px-6">
+      <div class="mx-auto max-w-7xl">
+        <div class={`grid md:grid-cols-2 gap-12 md:gap-20 items-center ${i%2!==0?'md:[&>*:first-child]:order-2':''}`}>
+          <div class="relative overflow-hidden aspect-[4/3] bg-ink-soft reveal">
+            <img src={s.img} alt={s.title}
+              class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-all duration-700 hover:scale-105"
+              loading="lazy"/>
+            <span class="ghost-num absolute top-4 left-4 text-[5rem]" aria-hidden="true">{s.num}</span>
+          </div>
+          <div class="reveal reveal-d1">
+            <p class="label">{s.num} — {s.title}</p>
+            <h2 class="mt-4 text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-tight tracking-[-0.025em]">
+              {s.headline.split(' ').map((w,wi,arr) =>
+                wi===arr.length-1 ? <span class="weight-anchor">{w}</span> : w+' '
+              )}
+            </h2>
+            {s.body.map(p => <p class="mt-4 text-sm text-stone leading-relaxed">{p}</p>)}
+            <div class="mt-8 border-t border-stone/12 pt-8">
+              <p class="label mb-4">What's included</p>
+              <ul class="space-y-2.5">
+                {s.deliverables.map(d => (
+                  <li class="flex items-start gap-3 text-sm text-stone">
+                    <svg class="mt-0.5 shrink-0 text-proof" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a href={`${base}contact`} class="btn-primary mt-8 inline-flex">
+              Get started
+              <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="py-28 md:py-36 px-6 text-center">
+    <div class="mx-auto max-w-xl reveal">
+      <p class="label">Not sure where to start?</p>
+      <h2 class="mt-4 text-4xl md:text-5xl font-light leading-tight tracking-[-0.025em]">
+        Let's <span class="weight-anchor">talk.</span>
+      </h2>
+      <p class="mt-4 text-stone text-sm">Free strategy call — no pitch, just a real conversation about your goals.</p>
+      <a href={`${base}contact`} class="btn-primary mt-8 inline-flex">
+        Book a free call
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+    </div>
+  </section>
+</Layout>

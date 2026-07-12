@@ -1,0 +1,20 @@
+---
+interface Props { items: string[]; label?: string; }
+const { items, label } = Astro.props;
+// Duplicate for seamless loop
+const doubled = [...items, ...items];
+---
+
+<div class="border-y border-stone/12 py-6 overflow-hidden marquee-wrap">
+  {label && (
+    <p class="label text-center mb-4">{label}</p>
+  )}
+  <div class="marquee-inner select-none" aria-hidden="true">
+    {doubled.map(item => (
+      <span class="text-stone/60 text-sm font-medium tracking-widest uppercase whitespace-nowrap">
+        {item}
+        <span class="mx-10 text-proof">·</span>
+      </span>
+    ))}
+  </div>
+</div>

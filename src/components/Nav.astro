@@ -1,0 +1,78 @@
+---
+const base = import.meta.env.BASE_URL;
+const links = [
+  { href:'services', label:'Services' },
+  { href:'work',     label:'Work'     },
+  { href:'about',    label:'About'    },
+  { href:'blog',     label:'Blog'     },
+];
+---
+
+<header id="site-header"
+  class="fixed top-0 left-0 right-0 z-40"
+  style="transition:background .35s,backdrop-filter .35s,border-color .35s;">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+
+    <!-- Wordmark — the logo's E trick -->
+    <a href={base} class="group flex items-center gap-px text-[1.05rem] font-light tracking-[-0.01em] text-paper" aria-label="QuidEdge home">
+      <span class="transition-colors group-hover:text-paper/70">Quid</span><span class="font-extrabold text-paper transition-colors group-hover:text-proof">E</span><span class="transition-colors group-hover:text-paper/70">dge</span><span class="ml-px font-light text-proof">.</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-9 md:flex" aria-label="Primary">
+      {links.map(l => (
+        <a href={`${base}${l.href}`}
+           class="label text-stone/80 hover:text-paper transition-colors">
+          {l.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- CTA + mobile toggle -->
+    <div class="flex items-center gap-4">
+      <a href={`${base}contact`} class="btn-primary hidden md:inline-flex">
+        Book a call
+        <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+      </a>
+      <button id="nav-toggle" aria-expanded="false" aria-controls="nav-mobile"
+        aria-label="Open menu"
+        class="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden">
+        <span id="bar1" class="h-px w-5 bg-paper transition-all duration-300 origin-center"></span>
+        <span id="bar2" class="h-px w-5 bg-paper transition-all duration-300 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="nav-mobile" class="hidden flex-col gap-7 border-t border-stone/12 bg-ink px-6 py-8 md:hidden">
+    {links.map(l => (
+      <a href={`${base}${l.href}`}
+         class="label text-stone hover:text-paper transition-colors">{l.label}</a>
+    ))}
+    <a href={`${base}contact`} class="btn-primary w-fit mt-2">
+      Book a call
+      <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="h-[72px]"></div>
+
+<script>
+  const toggle  = document.getElementById('nav-toggle');
+  const mobile  = document.getElementById('nav-mobile');
+  const bar1    = document.getElementById('bar1');
+  const bar2    = document.getElementById('bar2');
+  let open      = false;
+
+  toggle?.addEventListener('click', () => {
+    open = !open;
+    mobile?.classList.toggle('flex', open);
+    mobile?.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (bar1 && bar2) {
+      bar1.style.transform = open ? 'translateY(5px) rotate(45deg)'  : '';
+      bar2.style.transform = open ? 'translateY(-5px) rotate(-45deg)' : '';
+    }
+  });
+</script>

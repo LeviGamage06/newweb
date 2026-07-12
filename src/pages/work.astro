@@ -1,0 +1,168 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+
+const cases = [
+  {
+    client:   "Robert Herjavec",
+    slug:     "herjavec",
+    category: "Shark Tank Investor · Personal Brand",
+    desc:     "Crafting authority-driven content for a billionaire investor. Every frame engineered to build trust and command attention at scale.",
+    strategy: "Robert needed his content to carry the same weight as his boardroom presence — authoritative, concise, impossible to scroll past. We built a content identity around his investor mindset, using tight retention edits and data-driven hooks to keep viewers engaged through long-form analysis and short-form clips.",
+    metrics:  [{ val:"5.2M+", label:"Views Generated"   }, { val:"300%", label:"Engagement Spike"  }],
+    img:      "https://www.quidedge.com/images/robert logo.png",
+    video:    "https://www.quidedge.com/images/Robert Herjavec_Footage001.mp4",
+    accent:   "from-[#1a1208]",
+  },
+  {
+    client:   "Ryan Trahan",
+    slug:     "trahan",
+    category: "Elite YouTube Creator · Shorts Strategy",
+    desc:     "Short-form viral engineering for one of YouTube's most-watched creators. Retention-first editing built for maximum hook power and swipe-stop rate.",
+    strategy: "Ryan's audience expects novelty and pace. We developed a Shorts strategy that distilled his long-form energy into precise 15–60 second cuts engineered to hook in the first frame and drive re-watches. The result: 100M+ views across the short-form channel.",
+    metrics:  [{ val:"100M+", label:"Short-form Views" }, { val:"10×", label:"Performance Lift"  }],
+    img:      "https://www.quidedge.com/images/Ryan.jpg",
+    video:    "https://www.quidedge.com/images/ryan_trahan.mp4",
+    accent:   "from-[#0b1520]",
+  },
+  {
+    client:   "Enes Yilmazer",
+    slug:     "enes",
+    category: "Luxury Real Estate · YouTube Growth",
+    desc:     "Premium cinematic production for the world's #1 luxury real estate YouTube channel. Storytelling at global scale.",
+    strategy: "Enes built his brand on access — properties no one else could film. Our role was to match that access with production quality that felt cinematic, not documentary. We refined his editing rhythm, upgraded his motion package, and helped scale his channel past 4M subscribers.",
+    metrics:  [{ val:"50M+", label:"Channel Views"       }, { val:"4M+", label:"Subscribers Reached" }],
+    img:      "https://www.quidedge.com/images/enes yilmazer.png",
+    video:    "https://www.quidedge.com/images/Enes Yilmazer.mp4",
+    accent:   "from-[#0e1810]",
+  },
+  {
+    client:   "Daniel",
+    slug:     "daniel",
+    category: "Personal Brand · Content Strategy",
+    desc:     "Full-scale content strategy and editing for a rising personal brand. Identity, cadence, and output built to compound.",
+    strategy: "Daniel needed a system, not just edits. We built a repeatable content engine — hooks, structure, repurposing — that let his expertise reach audiences far beyond his existing network.",
+    metrics:  [{ val:"10×", label:"Content Output" }, { val:"∞", label:"Brand Runway" }],
+    img:      "https://www.quidedge.com/images/daniel.jpg",
+    video:    null,
+    accent:   "from-[#1a1018]",
+  },
+];
+---
+
+<Layout
+  title="Our Work"
+  description="Case studies — 155M+ views generated for Robert Herjavec, Ryan Trahan, Enes Yilmazer, and more."
+>
+  <!-- Header -->
+  <section class="py-24 md:py-32 px-6 border-b border-stone/15">
+    <div class="mx-auto max-w-7xl">
+      <p class="label reveal">Case studies</p>
+      <h1 class="mt-4 text-[clamp(2.5rem,7vw,5.5rem)] font-light leading-[1.0] tracking-[-0.03em] reveal reveal-d1">
+        Selected <span class="weight-anchor">Works.</span>
+      </h1>
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-stone/15 pt-8 reveal reveal-d2">
+        {[
+          { n:"155M+", l:"Total views generated"   },
+          { n:"4+",    l:"Elite global clients"     },
+          { n:"10×",   l:"Average engagement lift"  },
+          { n:"5+",    l:"Years of results"          },
+        ].map(s => (
+          <div>
+            <p class="text-3xl font-extrabold tracking-tight">{s.n}</p>
+            <p class="label mt-1">{s.l}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case studies -->
+  {cases.map((c, i) => (
+    <section id={c.slug} class="border-b border-stone/15 py-20 md:py-28 px-6">
+      <div class="mx-auto max-w-7xl">
+
+        <!-- Hero banner -->
+        <div class={`relative overflow-hidden bg-gradient-to-b ${c.accent} to-ink reveal`}>
+
+          {c.video ? (
+            /* Video thumbnail with play-on-hover */
+            <div class="group relative cursor-pointer"
+                 onclick={`this.querySelector('video')?.play(); this.querySelector('.play-icon')?.classList.add('hidden');`}>
+              <video
+                poster={c.img}
+                class="w-full max-h-[520px] object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                preload="none"
+                muted
+                playsinline
+                loop
+              >
+                <source src={c.video} type="video/mp4" />
+              </video>
+              <div class="play-icon absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full border border-paper/40 flex items-center justify-center backdrop-blur-sm bg-ink/30 group-hover:bg-ink/50 transition-all duration-300">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-paper ml-1">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                </div>
+              </div>
+              <!-- Overlay info on the video card -->
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink/95 to-transparent p-8 md:p-12">
+                <p class="label">{c.category}</p>
+                <h2 class="mt-2 text-[clamp(1.8rem,4vw,3.5rem)] font-light tracking-tight">{c.client}</h2>
+                <div class="flex gap-8 mt-5 border-t border-stone/20 pt-5">
+                  {c.metrics.map(m => (
+                    <div>
+                      <p class="text-2xl font-extrabold text-paper">{m.val}</p>
+                      <p class="label mt-0.5">{m.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Static image card for clients without video */
+            <div class="relative min-h-[400px]">
+              <img src={c.img} alt={c.client}
+                class="absolute inset-0 w-full h-full object-cover opacity-25"
+                loading="lazy"
+              />
+              <div class="relative z-10 p-8 md:p-12 min-h-[400px] flex flex-col justify-between">
+                <div>
+                  <p class="label">{c.category}</p>
+                  <h2 class="mt-2 text-[clamp(1.8rem,4vw,3.5rem)] font-light tracking-tight">{c.client}</h2>
+                  <p class="mt-4 max-w-lg text-stone text-sm">{c.desc}</p>
+                </div>
+                <div class="flex gap-8 mt-8 border-t border-stone/20 pt-6">
+                  {c.metrics.map(m => (
+                    <div>
+                      <p class="text-2xl font-extrabold text-paper">{m.val}</p>
+                      <p class="label mt-0.5">{m.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Strategy detail -->
+        <div class="mt-8 grid md:grid-cols-[180px_1fr] gap-6 md:gap-12 reveal reveal-d1">
+          <p class="label pt-1">The strategy</p>
+          <p class="text-stone text-sm leading-relaxed">{c.strategy}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- CTA -->
+  <section class="py-28 md:py-36 px-6 text-center">
+    <div class="mx-auto max-w-xl reveal">
+      <h2 class="text-4xl md:text-5xl font-light leading-tight tracking-tight">
+        Your results could be <span class="weight-anchor">next.</span>
+      </h2>
+      <p class="mt-4 text-stone">Let's build something that performs.</p>
+      <a href={`${base}contact`} class="btn-primary mt-8 inline-flex">Start a conversation</a>
+    </div>
+  </section>
+</Layout>

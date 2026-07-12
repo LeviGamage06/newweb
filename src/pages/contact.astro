@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+const base = import.meta.env.BASE_URL;
+---
+<Layout title="Book a Call" description="Apply to work with QuidEdge — limited availability for high-end clientele.">
+
+  <section class="py-20 md:py-28 px-6 border-b border-stone/12">
+    <div class="mx-auto max-w-7xl grid md:grid-cols-[1fr_1.1fr] gap-16 md:gap-24 items-start">
+
+      <!-- Left -->
+      <div class="reveal">
+        <p class="label">Limited availability</p>
+        <h1 class="mt-4 text-[clamp(2.5rem,7vw,5rem)] font-light leading-[0.95] tracking-[-0.04em]">
+          Start <span class="weight-anchor">Scaling.</span>
+        </h1>
+        <p class="mt-6 text-sm text-stone leading-relaxed max-w-sm">
+          Tell us about your goals and we'll be in touch within 24 hours to schedule your free strategy call.
+        </p>
+
+        <div class="mt-10 space-y-6 border-t border-stone/12 pt-10">
+          {[
+            { h:"Free strategy call",    b:"30 min with the founders — no pitch, just a real conversation about your goals." },
+            { h:"No lock-in contracts",  b:"Month-to-month. We earn your business every 30 days." },
+            { h:"Global team, fast turnaround", b:"24/7 production across timezones — no delays." },
+          ].map(f => (
+            <div class="flex gap-4">
+              <span class="text-proof mt-0.5 text-xs shrink-0">✦</span>
+              <div>
+                <p class="text-sm font-medium text-paper">{f.h}</p>
+                <p class="text-sm text-stone mt-1">{f.b}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 border-t border-stone/12 pt-10">
+          <p class="label mb-4">Trusted by</p>
+          <div class="flex flex-wrap gap-3">
+            {["Robert Herjavec","Ryan Trahan","Enes Yilmazer"].map(c=>(
+              <span class="border border-stone/18 px-3 py-1.5 text-xs text-stone">{c}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="reveal reveal-d1">
+        <!-- TODO: replace YOUR_INQUIRY_FORM_ID with a real Formspree ID (formspree.io) -->
+        <form action="https://formspree.io/f/YOUR_INQUIRY_FORM_ID" method="POST" class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="label block mb-2">Full name *</label>
+              <input id="name" name="name" type="text" required autocomplete="name"
+                class="w-full border border-stone/22 bg-transparent px-4 py-3 text-sm text-paper placeholder:text-stone/40 focus:border-proof focus:outline-none transition-colors"/>
+            </div>
+            <div>
+              <label for="email" class="label block mb-2">Email *</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                class="w-full border border-stone/22 bg-transparent px-4 py-3 text-sm text-paper placeholder:text-stone/40 focus:border-proof focus:outline-none transition-colors"/>
+            </div>
+          </div>
+
+          <div>
+            <label for="wa" class="label block mb-2">WhatsApp (optional)</label>
+            <input id="wa" name="whatsapp" type="tel" autocomplete="tel"
+              placeholder="+1 555 000 0000"
+              class="w-full border border-stone/22 bg-transparent px-4 py-3 text-sm text-paper placeholder:text-stone/40 focus:border-proof focus:outline-none transition-colors"/>
+          </div>
+
+          <div>
+            <label for="revenue" class="label block mb-2">Current annual revenue *</label>
+            <div class="relative">
+              <select id="revenue" name="revenue" required
+                class="w-full appearance-none border border-stone/22 bg-ink px-4 py-3 text-sm text-paper focus:border-proof focus:outline-none transition-colors pr-10">
+                <option value="" disabled selected>Select range</option>
+                <option>$10K – $20K</option>
+                <option>$20K – $50K</option>
+                <option>More than $50K+</option>
+              </select>
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-stone" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <div>
+            <label for="platform" class="label block mb-2">Primary platform *</label>
+            <div class="relative">
+              <select id="platform" name="platform" required
+                class="w-full appearance-none border border-stone/22 bg-ink px-4 py-3 text-sm text-paper focus:border-proof focus:outline-none transition-colors pr-10">
+                <option value="" disabled selected>Select your platform</option>
+                <option>YouTube</option>
+                <option>TikTok</option>
+                <option>Instagram / Reels</option>
+                <option>LinkedIn</option>
+                <option>Multiple platforms</option>
+              </select>
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-stone" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <div>
+            <label for="goal" class="label block mb-2">What are you working towards? *</label>
+            <textarea id="goal" name="goal" rows="4" required
+              placeholder="Tell us what you're trying to achieve..."
+              class="w-full resize-none border border-stone/22 bg-transparent px-4 py-3 text-sm text-paper placeholder:text-stone/40 focus:border-proof focus:outline-none transition-colors"></textarea>
+          </div>
+
+          <div class="space-y-3 text-xs text-stone">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="consent_marketing" required class="mt-0.5 accent-proof"/>
+              <span>I consent to receive marketing messages from QuidEdge. Message &amp; data rates may apply.</span>
+            </label>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" name="consent_updates" required class="mt-0.5 accent-proof"/>
+              <span>I consent to receive non-marketing order updates and reminders.</span>
+            </label>
+          </div>
+
+          <input type="hidden" name="_subject" value="New QuidEdge strategy call application"/>
+          <button type="submit" class="btn-primary w-full justify-center mt-2">
+            Submit Application
+            <svg class="arr" width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+          </button>
+          <p class="label text-center">Response within 24 hours · Contract-based · Cancel anytime</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
